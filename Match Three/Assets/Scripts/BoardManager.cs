@@ -49,6 +49,7 @@ public class BoardManager : MonoBehaviour
     private TileController[,] tiles;
 
     private int combo;
+
     private void Start()
     {
         Vector2 tileSize = tilePrefab.GetComponent<SpriteRenderer>().size;
