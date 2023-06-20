@@ -1,2 +1,2 @@
 # Match-Three
-Match Three for Dilo Academy
+Match Three Games
