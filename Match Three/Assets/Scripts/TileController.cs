@@ -50,6 +50,7 @@ public class TileController : MonoBehaviour
         }
 
         SoundManager.Instance.PlayTap();
+
         // Already selected this tile?
         if (isSelected)
         {
@@ -69,6 +70,7 @@ public class TileController : MonoBehaviour
                 {
                     TileController otherTile = previousSelected;
                     previousSelected.Deselect();
+
                     // swap tile
                     SwapTile(otherTile, () => {
                         if (board.GetAllMatches().Count > 0)
@@ -106,6 +108,7 @@ public class TileController : MonoBehaviour
         render.color = selectedColor;
         previousSelected = this;
     }
+
     private void Deselect()
     {
         isSelected = false;
@@ -124,15 +127,20 @@ public class TileController : MonoBehaviour
     {
         Vector2 startPosition = transform.position;
         float time = 0.0f;
+
         // run animation on next frame for safety reason
         yield return new WaitForEndOfFrame();
+
         while (time < moveDuration)
         {
             transform.position = Vector2.Lerp(startPosition, targetPosition, time / moveDuration);
             time += Time.deltaTime;
+
             yield return new WaitForEndOfFrame();
         }
+
         transform.position = targetPosition;
+
         onCompleted?.Invoke();
     }
     #endregion
@@ -147,18 +155,20 @@ public class TileController : MonoBehaviour
         }
         return null;
     }
+
     public List<TileController> GetAllAdjacentTiles()
     {
         List<TileController> adjacentTiles = new List<TileController>();
+
         for (int i = 0; i < adjacentDirection.Length; i++)
         {
             adjacentTiles.Add(GetAdjacent(adjacentDirection[i]));
         }
+
         return adjacentTiles;
     }
-    #endregion
-
     
+    #endregion
 
     #region Check Match
     private List<TileController> GetMatch(Vector2 castDir)
@@ -173,6 +183,7 @@ public class TileController : MonoBehaviour
             {
                 break;
             }
+
             matchingTiles.Add(otherTile);
             hit = Physics2D.Raycast(otherTile.transform.position, castDir, render.size.x);
         }
@@ -204,6 +215,7 @@ public class TileController : MonoBehaviour
         {
             return null;
         }
+
         List<TileController> matchingTiles = new List<TileController>();
 
         // get matches for horizontal and vertical
@@ -245,22 +257,30 @@ public class TileController : MonoBehaviour
         {
             transform.localScale = Vector2.Lerp(startSize, sizeBig, time / destroyBigDuration);
             time += Time.deltaTime;
+
             yield return new WaitForEndOfFrame();
         }
+
         transform.localScale = sizeBig;
 
         startSize = transform.localScale;
         time = 0.0f;
+
         while (time < destroySmallDuration)
         {
             transform.localScale = Vector2.Lerp(startSize, sizeSmall, time / destroySmallDuration);
             time += Time.deltaTime;
+
             yield return new WaitForEndOfFrame();
         }
+
         transform.localScale = sizeSmall;
+
         render.sprite = null;
+
         onCompleted?.Invoke();
     }
+    
     public void GenerateRandomTile(int x, int y)
     {
         transform.localScale = sizeNormal;

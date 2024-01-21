@@ -8,4 +8,13 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: 04e212320e4256a4eb3f2ae2083750b1
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: b0420b787eda28043b60a50e55478e0f
+  - enabled: 1
+    path: Assets/Scenes/The Great MatchThree.unity
+    guid: e7e1e96b048deda49bccf31f352a5823
   m_configObjects: {}
